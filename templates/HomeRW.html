@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+{%extends "mainTemplate.html"%}
+{%block title%}Software Engineering Home{%endblock%}
+{%block content%}
+<head>
+</head>
+<body>
+  <!--Middle Content-->
+  <div class="wrapper container-fluid">
+  <div class="row align-items-center" height="400">
+    <div class="col px-2 py-3">
+      <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" class="image align-items-center" width="400" height="400"></img>
+    </div>
+    <div class="col px-2 py-3">
+      <p class="text-center">
+        Our software engineering program teaches students about software engineering by combining school with real world industry work. Want to learn more?
+      </p>
+      <a href="AboutRW.html" style="color: blueviolet;">-> About</a>
+    </div>
+  </div>
+  </div>
+  <!--Content-->
+  <div class="wrapper container-fluid">
+  <div class="row align-items-center" height="400">
+    <div class="col px-2 py-3">
+      <p class="text-center">
+        Questions about our program? Check out our frequently asked questions page (FAQ)
+      </p>
+      <a href="FAQRW.html" style="color: blueviolet;">-> FAQ</a>
+    </div>
+    <div class="col px-2 py-3">
+      <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" class="image align-items-center" width="400" height="400"></img>
+    </div>
+  </div>
+  </div>
+  <!--Content-->
+  <div class="wrapper container-fluid">
+  <div class="row align-items-center">
+    <div class="col px-2 py-3">
+      <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" class="image align-items-center" width="400" height="400"></img>
+    </div>
+    <div class="col px-2 py-3">
+      <p class="text-center">
+        Want to apply for our work based software engineering program? Check out our application page.
+      </p>
+      <a href="AboutRW.html" style="color: blueviolet;">-> Apply</a>
+    </div>
+  </div>
+  </div>
+{%endblock%}
+</body>
+</html>

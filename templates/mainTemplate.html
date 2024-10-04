@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width" initial-scale="1">
+  <title>{% block title%}{%endblock%}</title>
+  <link rel="stylesheet" href="{{ url_for ('static', filename='bootstrap.css') }}">
+  <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+</head>
+<body>
+<!--Header-->
+<div class="sticky-md-top">
+  <div class="container-fluid" style="background-color:white;">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none ">
+        <div class="vstack gap-0">
+          <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" class="image-fluid" width="60" height="20" alt="Responsive image"></img>
+          <img src="{{ url_for('static', filename='Minnpoly Logo.jpg') }}" class="image-fluid" width="60" height="20" alt="Responsive image"></img>
+        </div>
+        <span class="Name fs-4 ps-3">Software Engineering</span>
+      </a>
+      <!--Drop down buttons-->
+      <div class="btn-group d-flex align-items-center" role="group" style="--bs-btn-active-border-color:#463066;--bs-btn-active-bg:#463066;--bs-btn-active-color:gold;--bs-btn-hover-bg:#463066;--bs-btn-hover-color:gold;">
+        <a class="btn active" href="#" role="button" aria-current="page">Home</a>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">About</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/Our_Program">Our Program</a></li>
+            <li><a class="dropdown-item" href="/Minnpoly">Minnpoly</a></li>
+            <li><a class="dropdown-item" href="/Industry_Partners">Industry partners</a></li>
+          </ul>
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Prerequisites</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/Prerequisites/MSU">Prerequisite Courses, MSU</a></li>
+            <li><a class="dropdown-item" href="/Prerequisites/Courses">Prerequisite Courses</a></li>
+          </ul>
+        </div>
+        <a class="btn" href="/Frequently_Asked_Questions">FAQ's</button>
+        <a class="btn" href="/Apply" role="button">Apply</a>
+      </div>
+      <!--Login-SignUp Btn's-->
+      <div class="btn-group d-flex align-items-center" role="group" style="--bs-btn-hover-bg:#463066;--bs-btn-hover-color:gold;">
+        <a class="btn" href="/Login" role="button">Login</a>
+        <a class="btn" style="--bs-btn-color:gold;--bs-btn-bg:#463066;" href="/SignUp" role="button">Sign Up</a>
+      </div>
+    </header>
+    </div>
+  </div>
+<!--Scroll Bar-->
+<div class="overflow-auto"></div>
+<!--Other Page content-->
+  {%block content%}
+  {%endblock%}
+<!--Footer-->
+<div class="container-fluid">
+  <footer class="row row-cols-3 py-5 mt-5 border-top justify-content-center flex-wrap fs-5 text-start" style="background-color:#463066;--bs-link-color:gold;">
+    <div class="col border border-dark border-2">
+      <div class="foot-block" style="height: 270px;">
+      <p class="fs-2 text-center">About</p>
+      <ul class="foot-nav">
+      <li><a href="/Our_Program" style="color:gold">Our Program</a></li>
+      <li><a href="/Minnpoly" style="color:gold">Minnpoly</a></li>
+      <li><a href="/Industry_Partners" style="color:gold">Industry Partners</a></li>
+      </ul>
+      </div>
+    </div>
+    <div class="col border border-dark border-2">
+      <p class="fs-2 text-center">Prerequisites</p>
+      <ul class="foot-nav">
+        <li><a href="/Prerequisites/MSU" style="color:gold">MSU Courses</a></li>
+        <li><a href="/Prerequisites/Courses" style="color:gold">Other University Courses</a></li>
+      </ul>
+    </div>
+    <div class="col fs-2 border border-dark border-2 d-flex align-items-center">
+      <div class="vstack align-items-center gap-2">
+        <a href="/Apply" style="color:gold">Apply</a>
+        <a href="/Frequently_Asked_Questions" style="color:gold">FAQ's</a>
+        <a href="/Calendar" style="color:gold">Calendar</a>
+        <a href="/Login" style="color:gold">login</a>
+        <a href="/SignUp" style="color:gold">Sign UP</a>
+      </div>
+    </div>
+  </footer>
+  </div>
+<!--SubFooter-->
+<footer class="sub-footer" style="background-color:black;">
+  <div class="row">
+    <div class="col">
+      <div class="container-fluid">
+        <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" class="myimage">
+      </div>
+    </div>
+    <div class="col">
+      <div class="container-fluid">
+        <img src="{{ url_for('static', filename='Minnpoly Logo.jpg') }}" class="myimage">
+      </div>
+    </div>
+  </div>
+<style>
+  .myimage{padding:inherit;margin:auto;height:200px;width:100%;display:block;}
+</style>
+</footer>
+</body>
+</html>
