@@ -22,22 +22,22 @@
       </a>
       <!--Drop down buttons-->
       <div class="btn-group d-flex align-items-center" role="group" style="--bs-btn-active-border-color:#463066;--bs-btn-active-bg:#463066;--bs-btn-active-color:gold;--bs-btn-hover-bg:#463066;--bs-btn-hover-color:gold;">
-        <a class="btn active" href="/" role="button" aria-current="page">Home</a>
+        <a class="btn {% if page == 'Home' %}active{% endif %}" href="/" role="button" aria-current="page">Home</a>
         <div class="btn-group" role="group">
-          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">About</button>
+          <button type="button" class="btn {% if page == 'About' %}active{% endif %} dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">About</button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/Our_Program">Our Program</a></li>
             <li><a class="dropdown-item" href="/Minnpoly">Minnpoly</a></li>
             <li><a class="dropdown-item" href="/Industry_Partners">Industry partners</a></li>
           </ul>
-          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Prerequisites</button>
+          <button type="button" class="btn {% if page == 'Preq' %}active{% endif %} dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Prerequisites</button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/Prerequisites/MSU">Prerequisite Courses, MSU</a></li>
             <li><a class="dropdown-item" href="/Prerequisites/Courses">Prerequisite Courses</a></li>
           </ul>
         </div>
-        <a class="btn" href="/Frequently_Asked_Questions">FAQ's</button>
-        <a class="btn" href="/Apply" role="button">Apply</a>
+        <a class="btn {% if page == 'FAQ' %}active{% endif %}" href="/Frequently_Asked_Questions">FAQ's</button>
+        <a class="btn {% if page == 'Apply' %}active{% endif %}" href="/Apply" role="button">Apply</a>
       </div>
       <!--Login-SignUp Btn's-->
       <div class="btn-group d-flex align-items-center" role="group" style="--bs-btn-hover-bg:#463066;--bs-btn-hover-color:gold;">

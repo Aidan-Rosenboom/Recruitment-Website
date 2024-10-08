@@ -11,35 +11,35 @@ mydb = mysql.connector.connect(
 
 @app.route('/')
 def home():
-  return render_template('HomeRW.html')
+  return render_template('HomeRW.html',page='Home')
 
 @app.route('/Our_Program')
 def ourProgram():
-  return render_template('OurProgram.html')
+  return render_template('OurProgram.html',page='About')
 
 @app.route('/Minnpoly')
 def minnpoly():
-  return render_template('Minnpoly.html')
+  return render_template('Minnpoly.html',page='About')
 
 @app.route('/Industry_Partners')
 def indPart():
-  return render_template('Indpart.html')
+  return render_template('Indpart.html',page='About')
 
 @app.route('/Prerequisites/MSU')
 def prereqMSU():
-  return render_template('prereqMSU.html')
+  return render_template('prereqMSU.html',page='Preq')
 
 @app.route('/Prerequisites/Courses')
 def prereqCourses():
-  return render_template('prereq.html')
+  return render_template('prereq.html',page='Preq')
 
 @app.route('/Apply')
 def apply():
-  return render_template('Application.html')
+  return render_template('Application.html',page='Apply')
 
 @app.route('/Frequently_Asked_Questions')
 def faq():
-  return render_template('FAQRW.html')
+  return render_template('FAQRW.html',page='FAQ')
 
 @app.route('/Calendar')
 def calendar():
