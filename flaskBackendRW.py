@@ -1,13 +1,16 @@
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, flash, redirect
+from flask_bcrypt import Bcrypt
 import mysql.connector
 
 app = Flask(__name__)
+app.secret_key = "Aidan"
+bcrypt = Bcrypt(app)
 
 mydb = mysql.connector.connect(
   host="srv1356.hstgr.io",
   user="u612285796_root",
   password="ILoveMae123",
-  database="u612285796_firstcohort")
+  database="u612285796_firstcohort") 
 
 @app.route('/')
 def home():
@@ -54,21 +57,32 @@ def signUp():
   return render_template('SignUpRW.html')
 
 #student submit also add a faculty submit function
-@app.route('/Submit', methods=['POST'])
+@app.route('/submit', methods=['GET','POST'])
 def submit():
+  cursor = mydb.cursor()
   if request.method == 'POST':
     myform = request.form
     firstName = myform['first']
     lastName = myform['last']
     email = myform['email']
     password = myform['password']
+    hashPass = bcrypt.generate_password_hash(password).decode("utf-8")
     starId = myform['starid']
     phone = myform['phone']
-    cursor = mydb.cursor()
-    cursor.execute("INSERT INTO student (first_name, last_name, phone, email, starid, password) VALUES (%s,%s,%s,%s,%s,%s)", (firstName, lastName, phone, email, starId, password))
-    mydb.commit()
-    cursor.close()
-    return "Success"
+    cursor.execute("SELECT email FROM profiles WHERE email = %s", (email,))
+    dup = cursor.fetchall()
+    if dup != []:
+      cursor.close()
+      flash("You already have an account Please login.", 'danger')
+      return redirect(url_for('login'))
+    else:
+      cursor.execute("INSERT INTO profiles (first_name, last_name, phone, email, starid, password) VALUES (%s,%s,%s,%s,%s,%s)", ( firstName, lastName, phone, email, starId, hashPass))
+      mydb.commit()
+      cursor.close()
+      flash("Success: Your all signed up!", 'success')
+      return redirect(url_for('home'))
+  cursor.close()
+  return render_template("SignUpRW.html")
   
 if __name__ == '__main__':
   app.run(debug=True)
