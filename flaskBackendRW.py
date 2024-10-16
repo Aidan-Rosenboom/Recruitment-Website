@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request, flash, redirect
+from flask import Flask, redirect, url_for, render_template, request, flash, redirect, session
 from flask_bcrypt import Bcrypt
 import mysql.connector
 
@@ -52,12 +52,7 @@ def calendar():
 def login():
   return render_template('LoginRW.html')
 
-@app.route('/SignUp')
-def signUp():
-  return render_template('SignUpRW.html')
-
-#student submit also add a faculty submit function
-@app.route('/submit', methods=['GET','POST'])
+@app.route('/SignUp', methods=['GET','POST'])
 def submit():
   cursor = mydb.cursor()
   if request.method == 'POST':
@@ -70,19 +65,26 @@ def submit():
     starId = myform['starid']
     phone = myform['phone']
     cursor.execute("SELECT email FROM profiles WHERE email = %s", (email,))
-    dup = cursor.fetchall()
-    if dup != []:
+    dup = cursor.fetchone()
+    if dup:
       cursor.close()
       flash("You already have an account Please login.", 'danger')
       return redirect(url_for('login'))
     else:
       cursor.execute("INSERT INTO profiles (first_name, last_name, phone, email, starid, password) VALUES (%s,%s,%s,%s,%s,%s)", ( firstName, lastName, phone, email, starId, hashPass))
       mydb.commit()
+      session['user'] = email
       cursor.close()
-      flash("Success: Your all signed up!", 'success')
+      flash("Success: Your all signed up!")
       return redirect(url_for('home'))
   cursor.close()
   return render_template("SignUpRW.html")
+
+@app.route('/Logout')
+def logout():
+  session.pop('user', None)
+  session.pop('name', None)
+  return redirect(url_for('home'))
   
 if __name__ == '__main__':
   app.run(debug=True)

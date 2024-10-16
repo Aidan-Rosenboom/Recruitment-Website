@@ -39,11 +39,27 @@
         <a class="btn {% if page == 'FAQ' %}active{% endif %}" href="/Frequently_Asked_Questions">FAQ's</button>
         <a class="btn {% if page == 'Apply' %}active{% endif %}" href="/Apply" role="button">Apply</a>
       </div>
+      {% if session.get('user') %}
+        <!--Profile dropdown (replaces login-signup)-->
+        <div class="flex-shrink-0 dropdown">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" alt="mdo" width="32" height="32" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/Logout">Sign out</a></li>
+            </ul>
+          </div>>
+      {% else %}
       <!--Login-SignUp Btn's-->
       <div class="btn-group d-flex align-items-center" role="group" style="--bs-btn-hover-bg:#463066;--bs-btn-hover-color:gold;">
         <a class="btn" href="/Login" role="button">Login</a>
         <a class="btn" style="--bs-btn-color:gold;--bs-btn-bg:#463066;" href="/SignUp" role="button">Sign Up</a>
       </div>
+      {% endif %}
     </header>
     </div>
   </div>
