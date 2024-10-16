@@ -57,25 +57,31 @@ def submit():
   cursor = mydb.cursor()
   if request.method == 'POST':
     myform = request.form
+    #gets the data from the signUp form
     firstName = myform['first']
     lastName = myform['last']
     email = myform['email']
     password = myform['password']
+    #generates hashcode for the password entered
     hashPass = bcrypt.generate_password_hash(password).decode("utf-8")
     starId = myform['starid']
     phone = myform['phone']
+    #cursor finds duplicate entries (if there are any)
     cursor.execute("SELECT email FROM profiles WHERE email = %s", (email,))
     dup = cursor.fetchone()
+    #checks for duplicate email entries
     if dup:
       cursor.close()
-      flash("You already have an account Please login.", 'danger')
+      flash("You already have an account Please login.")
       return redirect(url_for('login'))
     else:
+      #inserts the new entry into the profiles table in MySql
       cursor.execute("INSERT INTO profiles (first_name, last_name, phone, email, starid, password) VALUES (%s,%s,%s,%s,%s,%s)", ( firstName, lastName, phone, email, starId, hashPass))
       mydb.commit()
       #logs the user in, session uses email to identify who is signed in
       session['user'] = email
       cursor.close()
+      #I want to look into changing the color of the flash box for this statement
       flash("Success: Your all signed up!")
       return redirect(url_for('home'))
   cursor.close()
