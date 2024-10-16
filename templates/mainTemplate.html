@@ -39,6 +39,7 @@
         <a class="btn {% if page == 'FAQ' %}active{% endif %}" href="/Frequently_Asked_Questions">FAQ's</button>
         <a class="btn {% if page == 'Apply' %}active{% endif %}" href="/Apply" role="button">Apply</a>
       </div>
+      <!--This code chunk is tests to see if anyone is signed in an displays the profile image accordingly.-->
       {% if session.get('user') %}
         <!--Profile dropdown (replaces login-signup)-->
         <div class="flex-shrink-0 dropdown">
@@ -46,7 +47,6 @@
               <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
               <li><a class="dropdown-item" href="#">Settings</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li><hr class="dropdown-divider"></li>

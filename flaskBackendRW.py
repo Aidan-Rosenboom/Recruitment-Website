@@ -73,6 +73,7 @@ def submit():
     else:
       cursor.execute("INSERT INTO profiles (first_name, last_name, phone, email, starid, password) VALUES (%s,%s,%s,%s,%s,%s)", ( firstName, lastName, phone, email, starId, hashPass))
       mydb.commit()
+      #logs the user in, session uses email to identify who is signed in
       session['user'] = email
       cursor.close()
       flash("Success: Your all signed up!")
@@ -83,7 +84,6 @@ def submit():
 @app.route('/Logout')
 def logout():
   session.pop('user', None)
-  session.pop('name', None)
   return redirect(url_for('home'))
   
 if __name__ == '__main__':
