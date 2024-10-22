@@ -10,7 +10,8 @@ mydb = mysql.connector.connect(
   host="srv1356.hstgr.io",
   user="u612285796_root",
   password="ILoveMae123",
-  database="u612285796_firstcohort") 
+  database="u612285796_firstcohort",
+  pool_size= 3) 
 
 @app.route('/')
 def home():
@@ -47,6 +48,14 @@ def faq():
 @app.route('/Calendar')
 def calendar():
   return render_template('Calendar.html')
+
+@app.route('/Profile')
+def profile():
+    return render_template('profile.html', page='Profile')
+
+@app.route('/Settings')
+def accntSettings():
+  return render_template("Settings.html")
 
 @app.route('/Login')
 def login():
