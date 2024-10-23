@@ -1,0 +1,11 @@
+<!--This template is for Flash messaging, Messages that show up at the top of the screen-->
+{% with msg = get_flashed_messages() %}
+{% if msg %}
+    {% for message in msg %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+{% endif %}
+{% endwith %}
