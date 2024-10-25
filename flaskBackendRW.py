@@ -89,6 +89,10 @@ def submit():
       mydb.commit()
       #logs the user in, session uses email to identify who is signed in
       session['user'] = email
+      session['first'] = firstName
+      session['last'] = lastName
+      session['phone'] = phone
+      session['starId'] = starId
       cursor.close()
       #I want to look into changing the color of the flash box for this statement
       flash("Success: Your all signed up!")
@@ -99,6 +103,10 @@ def submit():
 @app.route('/Logout')
 def logout():
   session.pop('user', None)
+  session.pop('first', None)
+  session.pop('last', None)
+  session.pop('phone', None)
+  session.pop('starId', None)
   return redirect(url_for('home'))
   
 if __name__ == '__main__':
