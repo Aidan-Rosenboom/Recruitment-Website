@@ -69,6 +69,7 @@
 <!--Other Page content-->
   {%block content%}
   {%endblock%}
+{%if foot%}
 <!--Footer-->
 <div class="container-fluid">
   <footer class="row row-cols-3 py-5 mt-5 border-top justify-content-center flex-wrap fs-5 text-start" style="background-color:#463066;--bs-link-color:gold;">
@@ -118,5 +119,6 @@
   .myimage{padding:inherit;margin:auto;height:200px;width:100%;display:block;}
 </style>
 </footer>
+{%endif%}
 </body>
 </html>

@@ -15,54 +15,56 @@ mydb = mysql.connector.connect(
 
 @app.route('/')
 def home():
-  return render_template('HomeRW.html',page='Home')
+  return render_template('HomeRW.html',page='Home', foot = True)
 
 @app.route('/Our_Program')
 def ourProgram():
-  return render_template('OurProgram.html',page='About')
+  return render_template('OurProgram.html',page='About', foot = True)
 
 @app.route('/Minnpoly')
 def minnpoly():
-  return render_template('Minnpoly.html',page='About')
+  return render_template('Minnpoly.html',page='About', foot = True)
 
 @app.route('/Industry_Partners')
 def indPart():
-  return render_template('Indpart.html',page='About')
+  return render_template('Indpart.html',page='About', foot = True)
 
 @app.route('/Prerequisites/MSU')
 def prereqMSU():
-  return render_template('prereqMSU.html',page='Preq')
+  return render_template('prereqMSU.html',page='Preq', foot = True)
 
 @app.route('/Prerequisites/Courses')
 def prereqCourses():
-  return render_template('prereq.html',page='Preq')
+  return render_template('prereq.html',page='Preq', foot = True)
 
 @app.route('/Apply')
 def apply():
-  return render_template('Application.html',page='Apply')
+  return render_template('Application.html',page='Apply', foot = True)
 
 @app.route('/Frequently_Asked_Questions')
 def faq():
-  return render_template('FAQRW.html',page='FAQ')
+  return render_template('FAQRW.html',page='FAQ', foot = True)
 
 @app.route('/Calendar')
 def calendar():
-  return render_template('Calendar.html')
+  return render_template('Calendar.html', foot = False)
 
 @app.route('/Profile')
 def profile():
-    return render_template('profile.html', page='Profile')
+    return render_template('profile.html', page='Profile', foot = False)
 
 @app.route('/Settings')
 def accntSettings():
-  return render_template("Settings.html")
+  return render_template("Settings.html", foot = False)
 
 @app.route('/Login')
 def login():
-  return render_template('LoginRW.html')
+  foot = False
+  return render_template('LoginRW.html', foot = False)
 
 @app.route('/SignUp', methods=['GET','POST'])
 def submit():
+  foot = False
   cursor = mydb.cursor()
   if request.method == 'POST':
     myform = request.form
@@ -98,7 +100,7 @@ def submit():
       flash("Success: Your all signed up!")
       return redirect(url_for('home'))
   cursor.close()
-  return render_template("SignUpRW.html")
+  return render_template("SignUpRW.html", foot = False)
 
 @app.route('/Logout')
 def logout():
@@ -111,3 +113,5 @@ def logout():
   
 if __name__ == '__main__':
   app.run(debug=True)
+  #To show the footer in the template
+  foot = True
