@@ -6,8 +6,8 @@
 <head>
 </head>
 <body>
-    <div class="card text-center position-static">
-        <img src="" width="100" class="rounded-circle">
+    <div class="card text-center my-auto mx-auto position-static" style="width: 40rem">
+        <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" class="card image cap">
         <div class="card header">{%print(session.get("first") + " " + session.get('last'))%}</div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Email: {%print(session['user'])%} </li>

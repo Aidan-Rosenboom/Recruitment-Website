@@ -1,17 +1,27 @@
 from flask import Flask, redirect, url_for, render_template, request, flash, redirect, session
 from flask_bcrypt import Bcrypt
-import mysql.connector
+#import mysql.connector
+from flask_mysqldb import MySQL
+import MySQLdb.cursors
+import re
 
 app = Flask(__name__)
 app.secret_key = "Aidan"
 bcrypt = Bcrypt(app)
 
-mydb = mysql.connector.connect(
+app.config['MYSQL_HOST'] = 'srv1356.hstgr.io'
+app.config['MYSQL_USER'] = 'u612285796_root'
+app.config['MYSQL_PASSWORD'] = 'ILoveMae123'
+app.config['MYSQL_DB'] = 'u612285796_firstcohort'
+
+mydb = MySQL(app)
+
+"""mydb = mysql.connector.connect(
   host="srv1356.hstgr.io",
   user="u612285796_root",
   password="ILoveMae123",
   database="u612285796_firstcohort",
-  pool_size= 3) 
+  pool_size= 5)"""
 
 @app.route('/')
 def home():
@@ -65,7 +75,8 @@ def login():
 @app.route('/SignUp', methods=['GET','POST'])
 def submit():
   foot = False
-  cursor = mydb.cursor()
+  cursor = mydb.connection.cursor(MySQLdb.cursors.DictCursor)
+  #mydb.cursor()
   if request.method == 'POST':
     myform = request.form
     #gets the data from the signUp form
@@ -88,7 +99,7 @@ def submit():
     else:
       #inserts the new entry into the profiles table in MySql
       cursor.execute("INSERT INTO profiles (first_name, last_name, phone, email, starid, password) VALUES (%s,%s,%s,%s,%s,%s)", ( firstName, lastName, phone, email, starId, hashPass))
-      mydb.commit()
+      mydb.connection.commit()  #mydb.commit()
       #logs the user in, session uses email to identify who is signed in
       session['user'] = email
       session['first'] = firstName
@@ -97,7 +108,7 @@ def submit():
       session['starId'] = starId
       cursor.close()
       #I want to look into changing the color of the flash box for this statement
-      flash("Success: Your all signed up!")
+      flash("Success: You're all signed up!")
       return redirect(url_for('home'))
   cursor.close()
   return render_template("SignUpRW.html", foot = False)
