@@ -43,7 +43,7 @@
       <!--This code chunk is tests to see if anyone is signed in an displays the profile image accordingly.-->
       {% if session.get('user') %}
         <!--Profile dropdown (replaces login-signup)-->
-        <div class="flex-shrink-0 dropdown">
+        <div class="flex-shrink-0 dropdown px-2 pt-1">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="{{ url_for('static', filename='MSU Logo.jpg') }}" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
@@ -67,8 +67,8 @@
 <!--Scroll Bar-->
 <div class="overflow-auto"></div>
 <!--Other Page content-->
-  {%block content%}
-  {%endblock%}
+{%block content%}
+{%endblock%}
 {%if foot%}
 <!--Footer-->
 <div class="container-fluid">
