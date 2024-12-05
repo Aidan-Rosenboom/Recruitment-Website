@@ -63,8 +63,10 @@ def calendar():
 def profile():
     return render_template('profile.html', page='Profile', foot = False)
 
-@app.route('/Settings')
+@app.route('/Settings', methods = ['GET','POST'])
 def accntSettings():
+  if request.method == 'POST':
+    pass
   return render_template("Settings.html", foot = False)
 
 @app.route('/Login')
