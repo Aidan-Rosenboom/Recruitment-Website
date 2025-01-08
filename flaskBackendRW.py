@@ -1,6 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, flash, redirect, session
 from flask_bcrypt import Bcrypt
-#import mysql.connector
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
@@ -15,13 +14,7 @@ app.config['MYSQL_PASSWORD'] = 'ILoveMae123'
 app.config['MYSQL_DB'] = 'u612285796_firstcohort'
 
 mydb = MySQL(app)
-
-"""mydb = mysql.connector.connect(
-  host="srv1356.hstgr.io",
-  user="u612285796_root",
-  password="ILoveMae123",
-  database="u612285796_firstcohort",
-  pool_size= 5)"""
+#All app.route() statements direct you to the given pages of the web application
 
 @app.route('/')
 def home():
@@ -108,6 +101,7 @@ def submit():
       session['last'] = lastName
       session['phone'] = phone
       session['starId'] = starId
+      session['password'] = password
       cursor.close()
       #I want to look into changing the color of the flash box for this statement
       flash("Success: You're all signed up!")
@@ -122,6 +116,7 @@ def logout():
   session.pop('last', None)
   session.pop('phone', None)
   session.pop('starId', None)
+  session.pop('password', None)
   return redirect(url_for('home'))
   
 if __name__ == '__main__':
