@@ -10,40 +10,45 @@ Main template while also including flash messaging for popup messages to the use
 <head>
 </head>
 <body>
-  <container class="container-fluid text-center">
-    <form action="/SignUp" method="POST">
-      <div class="row px-5 mx-5">
-        <div class="form-group col">
-          <label for="first">First Name</label>
-          <input type="text" class="form-control" id="first" name="first" placeholder="First Name" required>
-        </div>
-        <div class="form-group col">
-          <label for="last">Last Name</label>
-          <input type="text" class="form-control" id="last" name="last" placeholder="Last Name" required>
-        </div>
+  <container class="container d-flex text-center justify-content-center align-items-center">
+    <div class="card">
+      <div class="card-body">
+        <p class="text-center">Sign Up</p>
+        <form action="/SignUp" method="POST">
+          <div class="row px-5 mx-5">
+            <div class="form-group col">
+              <label for="first">First Name</label>
+              <input type="text" class="form-control" id="first" name="first" placeholder="First Name" required>
+            </div>
+            <div class="form-group col">
+              <label for="last">Last Name</label>
+              <input type="text" class="form-control" id="last" name="last" placeholder="Last Name" required>
+            </div>
+          </div>
+          <div class="row px-5 mx-5">
+          <div class="form-group col">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-group col">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+          </div>
+          </div>
+          <div class="row px-5 mx-5">
+            <div class="form-group col">
+              <label for="starid">Star-ID</label>
+              <input type="text" class="form-control" id="starid" name="starid" placeholder="No Star-Id? Leave this blank!">
+            </div>
+            <div class="form-group col">
+              <label for="phone">Phone Number</label>
+              <input type="int" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
       </div>
-      <div class="row px-5 mx-5">
-      <div class="form-group col">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-      </div>
-      <div class="form-group col">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-      </div>
-      </div>
-      <div class="row px-5 mx-5">
-        <div class="form-group col">
-          <label for="starid">Star-Id</label>
-          <input type="text" class="form-control" id="starid" name="starid" placeholder="No Star-Id? Leave this blank!">
-        </div>
-        <div class="form-group col">
-          <label for="phone">Phone Number</label>
-          <input type="int" class="form-control" id="phone" name="phone" placeholder="Phone Number">
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
-    </form>
+    </div>
   </container>
   {%endblock%}
 </body>

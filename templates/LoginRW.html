@@ -7,6 +7,38 @@
 <head>
 </head>
 <body>
+    <!--This is the start of the login page form
+    I need to find a way to create container elements that I can center on a page
+    Then i need to figure out how to log people into their accounts with the encrypted passwords in mySql-->
+    <!--Dflex for flex containter, min-vh for height of container, justify content center for horizontal alignment, align items center for vertical alignment-->
+    <!--More work on centering-->
+    <div class="container d-flex min-vh-75 justify-content-center align-items-center">
+        <div class="row justify-content-center">
+            <div class="col md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <!--Text for login at the top of the card--> 
+                        <p class="text-center">Login</p>
+                        <form id="logForm" action="/Login", method="POST">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            </div>
+                            <!--Edit positioning of the button and the link-->
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <p>Not registered?
+                                <a href="/SignUp"> Create an account </a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {%endblock%}
 </body>
 </html>

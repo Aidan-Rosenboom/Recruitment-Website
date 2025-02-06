@@ -6,5 +6,40 @@
 <head>
 </head>
 <body>
+    <div container="container-fluid d-flex align-items-center">
+        <div class="mb-3">
+        <p> EDIT Profile Picture </p>
+        <form action="/Settings", method ="POST">
+            <div class="row text text-center">
+                <div class="col">
+                    <label for="first">First Name</label>
+                    <input type="text" class="form-control" id="first" name="first" placeholder= "{%print(session['first'])%}">    
+                </div>
+                <div class='col'>
+                    <label for="first">Last Name</label>
+                    <input type="text" class="form-control" id="last" name="last" placeholder="{%print(session['last'])%}">
+                </div>
+                <div class="col">
+                    <label for="first">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="{%print(session['user'])%}">
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col">
+                    <label for="first">Password</label>
+                    <input type="text" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+                <div class="col">
+                    <label for="first">Star-ID</label>
+                    <input type="text" class="form-control" id="starid" name="starid" placeholder="{%print(session['starId'])%}">
+                </div>
+                <div class="col">
+                    <label for="first">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="{%print(session['phone'])%}">
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
     {%endblock%}
 </body>

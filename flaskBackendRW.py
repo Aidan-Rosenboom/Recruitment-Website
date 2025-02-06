@@ -1,6 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, flash, redirect, session
 from flask_bcrypt import Bcrypt
-#import mysql.connector
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
@@ -15,13 +14,7 @@ app.config['MYSQL_PASSWORD'] = 'ILoveMae123'
 app.config['MYSQL_DB'] = 'u612285796_firstcohort'
 
 mydb = MySQL(app)
-
-"""mydb = mysql.connector.connect(
-  host="srv1356.hstgr.io",
-  user="u612285796_root",
-  password="ILoveMae123",
-  database="u612285796_firstcohort",
-  pool_size= 5)"""
+#All app.route() statements direct you to the given pages of the web application
 
 @app.route('/')
 def home():
@@ -63,18 +56,56 @@ def calendar():
 def profile():
     return render_template('profile.html', page='Profile', foot = False)
 
-@app.route('/Settings')
+@app.route('/Settings', methods = ['GET','POST'])
 def accntSettings():
+  if request.method == 'POST':
+    pass
   return render_template("Settings.html", foot = False)
 
-@app.route('/Login')
+@app.route('/Login', methods = ['GET', 'POST'])
 def login():
   foot = False
+  #cursor for the mySQL database
+  cursor = mydb.connection.cursor(MySQLdb.cursors.DictCursor)
+  if request.method == 'POST':
+    #stores the form data into logForm dict
+    logForm = request.form
+    #cursor select the account used for the email
+    cursor.execute("SELECT * FROM profiles WHERE email = %s", (logForm['email'],))
+    #checks if there is an account with the specific email address
+    accnt = cursor.fetchone()
+    if accnt is not None:
+      print('gets here when email is right')
+      #checks the password written in the form with the encrypted password
+      vp = bcrypt.check_password_hash(accnt['password'], logForm['password'])
+      #statement executes if there is an account under the given email 
+      #and that accounts password matches with the encrypted password
+      if vp:
+        #if everything is right it sets up the session for the account
+        flash("Success: You're signed in!")
+        session['user'] = accnt['email']
+        session['first'] = accnt['first_name']
+        session['last'] = accnt['last_name']
+        session['phone'] = accnt['phone']
+        session['starId'] = accnt['starid']
+        cursor.close()
+        return redirect(url_for('home'))
+      else:
+        cursor.close()
+        flash("Error: Username or password is incorrect")
+        return redirect(url_for('login'))
+    else:
+      cursor.close()
+      flash("Error: Username or password is incorrect")
+      return redirect(url_for('login'))
+  #renders the login page
+  cursor.close()
   return render_template('LoginRW.html', foot = False)
 
 @app.route('/SignUp', methods=['GET','POST'])
-def submit():
+def signUp():
   foot = False
+  #cursor for database used to search for duplicate entires
   cursor = mydb.connection.cursor(MySQLdb.cursors.DictCursor)
   #mydb.cursor()
   if request.method == 'POST':
@@ -99,7 +130,7 @@ def submit():
     else:
       #inserts the new entry into the profiles table in MySql
       cursor.execute("INSERT INTO profiles (first_name, last_name, phone, email, starid, password) VALUES (%s,%s,%s,%s,%s,%s)", ( firstName, lastName, phone, email, starId, hashPass))
-      mydb.connection.commit()  #mydb.commit()
+      mydb.connection.commit()
       #logs the user in, session uses email to identify who is signed in
       session['user'] = email
       session['first'] = firstName
@@ -115,13 +146,15 @@ def submit():
 
 @app.route('/Logout')
 def logout():
+  #this removes the users account information from the session
+  #signing them out
   session.pop('user', None)
   session.pop('first', None)
   session.pop('last', None)
   session.pop('phone', None)
   session.pop('starId', None)
   return redirect(url_for('home'))
-  
+
 if __name__ == '__main__':
   app.run(debug=True)
   #To show the footer in the template
